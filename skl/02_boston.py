@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import model_selection, linear_model
 from sklearn.metrics import mean_squared_error
+import os
 
-
+os.chdir(os.path.dirname(__file__))
 df_data = pd.read_excel('boston_house_data.xlsx', index_col=0) # 엑셀 파일 읽기
 df_target = pd.read_excel('boston_house_target.xlsx', index_col=0)
 
