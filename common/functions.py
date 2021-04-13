@@ -4,6 +4,9 @@ import numpy as np
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
 
+def sigmoid_grad(x):
+    return (1.0 - sigmoid(x)) * sigmoid(x)
+
 def lelu(x):
     return np.maximum(0, x)
 
@@ -26,7 +29,7 @@ def cross_entropy_error(y, t):
     return -np.sum(t * np.log(y + delta))
 
 
-def numerical_gradient(f, x):
+def numerical_gradient_1d(f, x):
     h = 1e-4
     grad = np.zeros_like(x)
 
@@ -35,7 +38,7 @@ def numerical_gradient(f, x):
         x[idx] = tmp_val + h
         fxh1 = f(x)
 
-        x[idx] = tmp_val + h
+        x[idx] = tmp_val - h
         fxh2 = f(x)
 
         grad[idx] = (fxh1 - fxh2) / (2*h)
@@ -43,11 +46,12 @@ def numerical_gradient(f, x):
 
     return grad
 
-def gradient_descent(f, init_x, lr=.01, step_num=100):
-    x = init_x
 
-    for i in range(step_num):
-        grad = numerical_gradient(f, x)
-        x -= lr * grad
-    return x
 
+# def gradient_descent(f, init_x, lr=.01, step_num=100):
+#     x = init_x
+#
+#     for i in range(step_num):
+#         grad = numerical_gradient(f, x)
+#         x -= lr * grad
+#     return x
