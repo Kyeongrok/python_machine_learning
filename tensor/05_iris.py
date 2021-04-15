@@ -14,9 +14,9 @@ y_data = iris['species'].values
 
 # Model 만들기
 model = tf.keras.Sequential([
-    tf.keras.layers.Dense(10, activation=tf.nn.relu),
-    tf.keras.layers.Dense(10, activation=tf.nn.relu),
-    tf.keras.layers.Dense(1)
+    tf.keras.layers.Dense(64, activation=tf.nn.relu, input_shape=(4, )),
+    tf.keras.layers.Dense(64, activation=tf.nn.relu),
+    tf.keras.layers.Dense(3, activation='softmax')
 ])
 
 model.compile(loss='categorical_crossentropy', metrics='accuracy')
